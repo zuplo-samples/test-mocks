@@ -318,353 +318,46 @@
     }
   },
   "paths": {
-    "/v1/todos": {
+    "/handler1": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
       "get": {
-        "summary": "Get all todos",
-        "description": "Gets all the todos in the todo list.",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlRewriteHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "rewritePattern": "https://jsonplaceholder.typicode.com/todos",
-              "forwardSearch": true
-            }
-          },
-          "policies": {
-            "inbound": []
-          }
-        },
-        "operationId": "b61c0cd1-b380-4440-a430-840ea85f3e9c",
-        "responses": {
-          "200": {
-            "description": "A list of todos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TodoListObject"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Standard Todo List Endpoints"
-        ]
-      },
-      "post": {
-        "summary": "Create Todo",
-        "description": "Creates a todo list item.",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlRewriteHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "rewritePattern": "https://jsonplaceholder.typicode.com/todos",
-              "forwardSearch": true
-            }
-          },
-          "policies": {
-            "inbound": [
-              "validate-json-schema-inbound"
-            ]
-          }
-        },
-        "tags": [
-          "Standard Todo List Endpoints"
-        ],
-        "operationId": "f9e30d74-56ca-4f1e-bcb3-75fe305ea5e4",
-        "requestBody": {
-          "description": "Payload required to create a todo list item.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InsertTodoObject"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "The created todo list item",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TodoObject"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Schema validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/$todosAndUsers": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
-      "get": {
-        "summary": "Get todos with user information",
-        "description": "Gets the list of todos, with a `user` property that contains information about the user that created the todo list item.",
+        "summary": "Handler 1",
+        "description": "Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do `eiusmod tempor` incididunt ut labore et dolore magna aliqua.",
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
             "export": "default",
-            "module": "$import(./modules/todos-and-users)",
+            "module": "$import(./modules/handler1)",
             "options": {}
           },
           "policies": {
             "inbound": []
           }
         },
-        "operationId": "398f226b-7401-4906-9aba-8dee92068f94",
-        "tags": [
-          "Extended Todo List Endpoints"
-        ],
-        "responses": {
-          "200": {
-            "description": "Todos with creating user data attached",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "required": [
-                      "user",
-                      "userId",
-                      "id",
-                      "title",
-                      "completed"
-                    ],
-                    "allOf": [
-                      {
-                        "$ref": "#/components/schemas/TodoObject"
-                      }
-                    ],
-                    "properties": {
-                      "user": {
-                        "$ref": "#/components/schemas/UserObject"
-                      }
-                    },
-                    "examples": [
-                      {
-                        "userId": 1,
-                        "id": 1,
-                        "title": "Take out the trash",
-                        "completed": false,
-                        "user": {
-                          "id": 1,
-                          "name": "Leanne Graham",
-                          "username": "Bret",
-                          "email": "Sincere@april.biz",
-                          "address": {
-                            "street": "Kulas Light",
-                            "suite": "Apt. 556",
-                            "city": "Gwenborough",
-                            "zipcode": "92998-3874",
-                            "geo": {
-                              "lat": "-37.3159",
-                              "lng": "81.1496"
-                            }
-                          },
-                          "phone": "1-770-736-8031 x56442",
-                          "website": "hildegard.org",
-                          "company": {
-                            "name": "Romaguera-Crona",
-                            "catchPhrase": "Multi-layered client-server neural-net",
-                            "bs": "harness real-time e-markets"
-                          }
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        }
+        "operationId": "48f2c393-120e-4a54-ad34-d600fee59b0d"
       }
     },
-    "/v1/$todosWithNoUserId": {
+    "/handler2/:param1": {
       "x-zuplo-path": {
         "pathMode": "open-api"
       },
       "get": {
-        "summary": "Get todos with user information removed",
-        "description": "Gets the list of todos with the user information stripped out. Use this API if the user's ID is sensitive information that can't be leaked to the product.",
+        "summary": "Handler 2",
+        "description": "Lorem ipsum dolor sit amet, **consectetur adipiscing** elit, sed do `eiusmod tempor` incididunt ut labore et dolore magna aliqua.",
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "urlRewriteHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "rewritePattern": "https://jsonplaceholder.typicode.com/todos",
-              "forwardSearch": true
-            }
-          },
-          "policies": {
-            "inbound": [],
-            "outbound": [
-              "custom-code-outbound"
-            ]
-          }
-        },
-        "operationId": "d98a939d-d1a2-4352-8c45-3566bfd67860",
-        "tags": [
-          "Extended Todo List Endpoints"
-        ],
-        "responses": {
-          "200": {
-            "description": "Anonymized todo list",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AnonymousTodoObject"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/todos/:todoId": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
-      "patch": {
-        "summary": "Update Todo",
-        "description": "Updates a todo list item with a matching `todoId`. Will return an error if a matching todo item is not found.",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlRewriteHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "rewritePattern": "https://jsonplaceholder.typicode.com/todos/${params.todoId}",
-              "forwardSearch": true
-            }
-          },
-          "policies": {
-            "inbound": [
-              "validate-json-schema-inbound-1"
-            ]
-          }
-        },
-        "operationId": "f3334d8b-37f9-489b-87c5-08a8beb5657c",
-        "tags": [
-          "Standard Todo List Endpoints"
-        ],
-        "parameters": [
-          {
-            "name": "todoId",
-            "in": "path",
-            "description": "ID of the todo list item to be modified.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The new todo object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TodoObject"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Schema validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SchemaValidationError"
-                }
-              }
-            }
-          }
-        },
-        "requestBody": {
-          "description": "Request body to update a todo list object.",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateTodoObject"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete Todo",
-        "description": "Deletes a todo list item. Will return an error if the todo list item does not exist.",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlRewriteHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": {
-              "rewritePattern": "https://jsonplaceholder.typicode.com/todos/${params.todoId}",
-              "forwardSearch": true
-            }
+            "export": "default",
+            "module": "$import(./modules/handler2)",
+            "options": {}
           },
           "policies": {
             "inbound": []
           }
         },
-        "operationId": "1647d06c-2a96-41ab-a2f7-ebb55d5bcd76",
-        "tags": [
-          "Standard Todo List Endpoints"
-        ],
-        "parameters": [
-          {
-            "name": "todoId",
-            "in": "path",
-            "description": "ID of the todo list item to be deleted.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Empty response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "examples": [
-                    {}
-                  ]
-                }
-              }
-            }
-          }
-        }
+        "operationId": "3b121a1d-54ed-4af1-973f-f4a9de5352d3"
       }
     }
   }

@@ -46,7 +46,7 @@ describe("Handler test", function () {
     const param1 = "hello";
 
     // Create a request, this isn't mocked
-    const mockRequest = new ZuploRequest("https://api.zuplo.app", {
+    const mockRequest = new ZuploRequest("https://my-api.zuplo.app", {
       params: {
         param1,
       },
@@ -54,7 +54,7 @@ describe("Handler test", function () {
 
     // Use undici to mock the fetch that happens in the handler
     // See: https://github.com/nodejs/undici/blob/main/docs/api/MockAgent.md
-    const mockPool = mockAgent.get(`https://example.com`);
+    const mockPool = mockAgent.get(`https://api.zuplo.io`);
     mockPool
       .intercept({ path: `/${param1}` })
       .reply(200, { data: "this is some data" });
