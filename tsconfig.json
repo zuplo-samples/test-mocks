@@ -6,6 +6,7 @@
     "outDir": "./dist",
     "module": "commonjs",
     "target": "esnext",
+    "lib": ["ESNext", "WebWorker"],
     "preserveConstEnums": true,
     "moduleResolution": "node",
     "useUnknownInCatchVariables": false,
