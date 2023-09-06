@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "zup dev",
     "test": "zup test",
-    "unit": "mocha --require ts-node/register tests/*.spec.ts"
+    "unit": "mocha --require ts-node/register unit-tests/*.spec.ts"
   },
   "dependencies": {
     "zuplo": "latest"

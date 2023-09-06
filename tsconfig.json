@@ -1,5 +1,11 @@
 {
-  "include": ["modules/**/*", ".zuplo/**/*", "tests/**/*"],
+  "include": [
+    "modules/**/*",
+    ".zuplo/**/*",
+    "tests/**/*",
+    "__test/handlers.spec.ts",
+    "__test/mocks.ts"
+  ],
   "exclude": ["./node_modules", "./dist"],
   "compilerOptions": {
     "baseUrl": ".",
